@@ -74,7 +74,7 @@ const Battle = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!gameData?.activeBattle) navigate("/");
+      if (!gameData?.activeBattle) return navigate("/");
     }, [500]);
 
     return () => clearTimeout(timer);

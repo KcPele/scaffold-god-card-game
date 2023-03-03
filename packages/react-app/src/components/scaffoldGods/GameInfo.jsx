@@ -19,9 +19,10 @@ const GameInfo = () => {
       await tx(writeContracts.ScaffoldGods.quitBattle(battleName));
 
       setShowAlert({ status: true, type: "info", message: `You're quitting the ${battleName}` });
-      navigate("/create-battle");
+      return navigate("/create-battle");
     } catch (error) {
       setErrorMessage(error);
+      return null;
     }
   };
 

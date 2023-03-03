@@ -29,11 +29,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   // Getting a previously deployed contract
   const scaffoldGods = await ethers.getContract("ScaffoldGods", deployer);
+  await scaffoldGods.transferOwnership(
+    "0xf4030DdD79fc7Fd49b25C976C5021D07568B4F91"
+  );
   /*  
     
-    await scaffoldGods.transferOwnership(
-      "ADDRESS_HERE"
-    );
 
     //const ScaffoldGods = await ethers.getContractAt('ScaffoldGods', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   */
@@ -66,16 +66,16 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   // You can also Verify your contracts with Etherscan here...
   // You don't want to verify on localhost
-  // try {
-  //   if (chainId !== localChainId) {
-  //     await run("verify:verify", {
-  //       address: ScaffoldGods.address,
-  //       contract: "contracts/ScaffoldGods.sol:ScaffoldGods",
-  //       constructorArguments: [],
-  //     });
-  //   }
-  // } catch (error) {
-  //   console.error(error);
-  // }
+  try {
+    if (chainId !== localChainId) {
+      await run("verify:verify", {
+        address: scaffoldGods.address,
+        contract: "contracts/ScaffoldGods.sol:ScaffoldGods",
+        constructorArguments: [_metadataUri],
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 module.exports.tags = ["ScaffoldGods"];

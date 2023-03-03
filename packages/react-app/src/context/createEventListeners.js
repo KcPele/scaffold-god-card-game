@@ -10,7 +10,7 @@ const AddNewEvent = (eventFilter, provider, cb) => {
 
   provider.on(eventFilter, logs => {
     const parsedLog = new ethers.utils.Interface(
-      deployedContracts[NETWORKS.localhost.chainId].localhost.contracts.ScaffoldGods.abi,
+      deployedContracts[NETWORKS.goerli.chainId].goerli.contracts.ScaffoldGods.abi,
     ).parseLog(logs);
 
     cb(parsedLog);
@@ -114,6 +114,6 @@ export const createEventListeners = ({
       setShowAlert({ status: true, type: "failure", message: "You lost!" });
     }
 
-    navigate("/create-battle");
+    return navigate("/create-battle");
   });
 };
